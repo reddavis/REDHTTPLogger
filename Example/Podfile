@@ -1,0 +1,11 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
+target 'REDHTTPLogger', :exclusive => true do
+  pod "REDHTTPLogger", :path => "../"
+end
+
+target 'Tests', :exclusive => true do
+  pod "REDHTTPLogger", :path => "../"
+
+  pod 'Kiwi'
+end
