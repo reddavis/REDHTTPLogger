@@ -10,18 +10,15 @@
 Pod::Spec.new do |s|
   s.name             = "REDHTTPLogger"
   s.version          = "0.1.0"
-  s.summary          = "A short description of REDHTTPLogger."
+  s.summary          = "REDHTTPLogger makes it easy to inspect HTTP requests happening inside your iOS app without needed the debugger attached."
   s.description      = <<-DESC
-                       An optional longer description of REDHTTPLogger
-
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                        REDHTTPLogger makes it easy to inspect HTTP requests happening inside your iOS app without needed the debugger attached.
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/REDHTTPLogger"
+  s.homepage         = "https://github.com/reddavis/REDHTTPLogger"
   s.license          = 'MIT'
   s.author           = { "Red Davis" => "me@red.to" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/REDHTTPLogger.git", :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.source           = { :git => "https://github.com/reddavis/REDHTTPLogger.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/reddavis'
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
@@ -31,7 +28,7 @@ Pod::Spec.new do |s|
     'REDHTTPLogger' => ['Pod/Assets/*.png']
   }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
+    s.public_header_files = 'Pod/Classes/**/*.h'
     s.frameworks = 'UIKit'
     s.dependency 'AFNetworking', '~> 2.3'
 end
