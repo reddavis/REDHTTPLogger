@@ -18,7 +18,6 @@ Pod::Spec.new do |s|
                        * Don't worry about the indent, we strip it!
                        DESC
   s.homepage         = "https://github.com/<GITHUB_USERNAME>/REDHTTPLogger"
-  # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Red Davis" => "me@red.to" }
   s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/REDHTTPLogger.git", :tag => s.version.to_s }
@@ -33,6 +32,6 @@ Pod::Spec.new do |s|
   }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
-  # s.frameworks = 'UIKit', 'MapKit'
-  # s.dependency 'AFNetworking', '~> 2.3'
+    s.frameworks = 'UIKit'
+    s.dependency 'AFNetworking', '~> 2.3'
 end

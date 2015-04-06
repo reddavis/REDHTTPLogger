@@ -1,0 +1,31 @@
+{
+  "name": "REDHTTPLogger",
+  "version": "0.1.0",
+  "summary": "A short description of REDHTTPLogger.",
+  "description": "                       An optional longer description of REDHTTPLogger\n\n                       * Markdown format.\n                       * Don't worry about the indent, we strip it!\n",
+  "homepage": "https://github.com/<GITHUB_USERNAME>/REDHTTPLogger",
+  "license": "MIT",
+  "authors": {
+    "Red Davis": "me@red.to"
+  },
+  "source": {
+    "git": "https://github.com/<GITHUB_USERNAME>/REDHTTPLogger.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "7.0"
+  },
+  "requires_arc": true,
+  "source_files": "Pod/Classes/**/*",
+  "resource_bundles": {
+    "REDHTTPLogger": [
+      "Pod/Assets/*.png"
+    ]
+  },
+  "frameworks": "UIKit",
+  "dependencies": {
+    "AFNetworking": [
+      "~> 2.3"
+    ]
+  }
+}

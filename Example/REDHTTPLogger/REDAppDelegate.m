@@ -8,14 +8,71 @@
 
 #import "REDAppDelegate.h"
 
+#import <AFNetworking/AFNetworking.h>
+#import <REDHTTPLogger/REDHTTPLogger.h>
+#import <REDHTTPLogger/REDHTTPLogsViewController.h>
+
+
+@interface REDAppDelegate ()
+
+- (void)dispatchHTTPRequest;
+
+@end
+
+
 @implementation REDAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:[[REDHTTPLogsViewController alloc] init]];
+    self.window.rootViewController = navigationController;
+    [self.window makeKeyAndVisible];
+
+    [[REDHTTPLogger sharedLogger] startLogging];
+    
+    [self dispatchHTTPRequest];
+    [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(dispatchHTTPRequest) userInfo:nil repeats:YES];
+    
     return YES;
 }
-							
+
+#pragma mark -
+
+- (void)dispatchHTTPRequest
+{
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    // GET JSON
+    [manager GET:@"http://demo1289807.mockable.io/200JSON" parameters:@{@"param1":@"value1"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        // GET XML
+        [manager GET:@"http://demo1289807.mockable.io/200XML" parameters:@{@"param1":@"value1"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            
+        }];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+
+    }];
+    
+    // POST JSON
+    [manager POST:@"http://demo1289807.mockable.io/200JSON" parameters:@{@"param1":@"value1"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+    
+    // 404
+    [manager POST:@"http://demo1289807.mockable.io/404" parameters:@{@"param1":@"value1"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+}
+
+#pragma mark -
+
 - (void)applicationWillResignActive:(UIApplication *)application
 {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

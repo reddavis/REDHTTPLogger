@@ -1,0 +1,40 @@
+PODS:
+  - AFNetworking (2.5.2):
+    - AFNetworking/NSURLConnection (= 2.5.2)
+    - AFNetworking/NSURLSession (= 2.5.2)
+    - AFNetworking/Reachability (= 2.5.2)
+    - AFNetworking/Security (= 2.5.2)
+    - AFNetworking/Serialization (= 2.5.2)
+    - AFNetworking/UIKit (= 2.5.2)
+  - AFNetworking/NSURLConnection (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/NSURLSession (2.5.2):
+    - AFNetworking/Reachability
+    - AFNetworking/Security
+    - AFNetworking/Serialization
+  - AFNetworking/Reachability (2.5.2)
+  - AFNetworking/Security (2.5.2)
+  - AFNetworking/Serialization (2.5.2)
+  - AFNetworking/UIKit (2.5.2):
+    - AFNetworking/NSURLConnection
+    - AFNetworking/NSURLSession
+  - Kiwi (2.3.1)
+  - REDHTTPLogger (0.1.0):
+    - AFNetworking (~> 2.3)
+
+DEPENDENCIES:
+  - Kiwi
+  - REDHTTPLogger (from `../`)
+
+EXTERNAL SOURCES:
+  REDHTTPLogger:
+    :path: ../
+
+SPEC CHECKSUMS:
+  AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
+  Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
+  REDHTTPLogger: 71cb4f56d598a3c3c374d81ad38bb94b365fbf67
+
+COCOAPODS: 0.36.0
