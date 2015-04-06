@@ -49,7 +49,7 @@
     {
         self.mutableLogs = [NSMutableArray array];
         self.observers = [NSMutableSet set];
-        self.maximumNumberOfLogs = 10;
+        self.maximumNumberOfLogs = 100;
     }
     
     return self;
