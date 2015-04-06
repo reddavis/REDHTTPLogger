@@ -5,11 +5,20 @@
 [![License](https://img.shields.io/cocoapods/l/REDHTTPLogger.svg?style=flat)](http://cocoapods.org/pods/REDHTTPLogger)
 [![Platform](https://img.shields.io/cocoapods/p/REDHTTPLogger.svg?style=flat)](http://cocoapods.org/pods/REDHTTPLogger)
 
+REDHTTPLogger makes it easy to inspect HTTP requests happening inside your iOS app without needed the debugger attached.
+
+### Features
+- Integrates with AFNetworking
+- Shows state and response time of a request
+- Share request log via email, sms etc.
+
+## Example
+
+[View video](http://up.red.to/smdi0LSdNn)
+
 ## Usage
 
 To run the example project, clone the repo, and run `pod install` from the Example directory first.
-
-## Requirements
 
 ## Installation
 
