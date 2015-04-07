@@ -17,6 +17,8 @@
 @property (strong, nonatomic) UITableView *tableView;
 @property (copy, nonatomic) NSArray *logs;
 
+- (void)doneButtonTapped:(id)sender;
+
 @end
 
 
@@ -29,7 +31,7 @@
     self = [super init];
     if (self)
     {
-        
+        self.title = @"HTTP Logs";
     }
 
     return self;
@@ -40,6 +42,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    if (self.navigationController.viewControllers.firstObject == self)
+    {
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone target:self action:@selector(doneButtonTapped:)];
+    }
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStylePlain];
     self.tableView.dataSource = self;
@@ -73,6 +80,13 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - Actions
+
+- (void)doneButtonTapped:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - REDHTTPLoggerObserver
