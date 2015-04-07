@@ -12,6 +12,43 @@ REDHTTPLogger makes it easy to inspect HTTP requests happening inside your iOS a
 - Shows state and response time of a request
 - Share request log via email, sms etc.
 
+## How To Use
+
+### To Start The Logger
+
+```
+#import “REDAppDelegate.h”
+
+#import <REDHTTPLogger/REDHTTPLogger.h>
+
+
+@implementation REDAppDelegate
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+		…
+
+    [[REDHTTPLogger sharedLogger] startLogging];
+    
+		…
+    
+    return YES;
+}
+
+@end
+```
+
+### To Present Logger
+
+```
+- (void)someAction:(id)sender
+{
+    REDHTTPLogsViewController *logsViewController = [[REDHTTPLogsViewController alloc] init];
+    UINavigationController *logsNavigationController = [[UINavigationController alloc] initWithRootViewController:logsViewController];
+    [self.navigationController presentViewController:logsNavigationController animated:YES completion:nil];
+}
+```
+
 ## Example
 
 [View video](http://up.red.to/smdi0LSdNn)
