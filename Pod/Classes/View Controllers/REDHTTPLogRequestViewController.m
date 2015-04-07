@@ -24,9 +24,16 @@
 
 typedef NS_ENUM(NSUInteger, REDTableSection)
 {
-    REDTableSectionMethod = 0,
+    REDTableSectionDetails = 0,
     REDTableSectionHeaders,
     REDTableSectionBody
+};
+
+typedef NS_ENUM(NSUInteger, REDTableDetailsRow)
+{
+    REDTableDetailsRowMethod = 0,
+    REDTableDetailsRowBaseURL,
+    REDTableDetailsRowPath
 };
 
 
@@ -90,8 +97,8 @@ typedef NS_ENUM(NSUInteger, REDTableSection)
     NSUInteger numberOfRows = 0;
     switch (section)
     {
-        case REDTableSectionMethod:
-            numberOfRows = 1;
+        case REDTableSectionDetails:
+            numberOfRows = 3;
             break;
         case REDTableSectionHeaders:
             numberOfRows = self.HTTPLog.requestHTTPHeaderFields.count;
@@ -135,10 +142,25 @@ typedef NS_ENUM(NSUInteger, REDTableSection)
         
         switch (indexPath.section)
         {
-            case REDTableSectionMethod:
+            case REDTableSectionDetails:
             {
-                cell.textLabel.text = self.HTTPLog.HTTPMethod;
-                cell.detailTextLabel.text = self.HTTPLog.requestURL.absoluteString;
+                switch (indexPath.row)
+                {
+                    case REDTableDetailsRowMethod:
+                        cell.textLabel.text = @"Method";
+                        cell.detailTextLabel.text = self.HTTPLog.HTTPMethod;
+                        break;
+                    case REDTableDetailsRowBaseURL:
+                        cell.textLabel.text = @"Base URL";
+                        cell.detailTextLabel.text = self.HTTPLog.requestURL.host;
+                        break;
+                    case REDTableDetailsRowPath:
+                        cell.textLabel.text = @"Path";
+                        cell.detailTextLabel.text = self.HTTPLog.requestURL.path;
+                        break;
+                    default:
+                        break;
+                }
                 
                 break;
             }
@@ -169,9 +191,6 @@ typedef NS_ENUM(NSUInteger, REDTableSection)
     NSString *header = nil;
     switch (section)
     {
-        case REDTableSectionMethod:
-            header = @"Method";
-            break;
         case REDTableSectionHeaders:
             header = @"Headers";
             break;
