@@ -11,9 +11,9 @@ Pod::Spec.new do |s|
   s.name             = "REDHTTPLogger"
   s.version          = "0.1.0"
   s.summary          = "REDHTTPLogger makes it easy to inspect HTTP requests happening inside your iOS app without needed the debugger attached."
-  s.description      = <<-DESC
-
-                       DESC
+#s.description      = <<-DESC
+#
+#                       DESC
   s.homepage         = "https://github.com/reddavis/REDHTTPLogger"
   s.license          = 'MIT'
   s.author           = { "Red Davis" => "me@red.to" }
