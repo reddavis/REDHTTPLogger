@@ -2,7 +2,6 @@
   "name": "REDHTTPLogger",
   "version": "0.1.0",
   "summary": "REDHTTPLogger makes it easy to inspect HTTP requests happening inside your iOS app without needed the debugger attached.",
-  "description": "                        REDHTTPLogger makes it easy to inspect HTTP requests happening inside your iOS app without needed the debugger attached.\n",
   "homepage": "https://github.com/reddavis/REDHTTPLogger",
   "license": "MIT",
   "authors": {
@@ -28,6 +27,9 @@
   "dependencies": {
     "AFNetworking": [
       "~> 2.3"
+    ],
+    "RequestUtils": [
+      "~> 1.1"
     ]
   }
 }

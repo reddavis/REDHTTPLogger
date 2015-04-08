@@ -60,3 +60,9 @@
 #define COCOAPODS_VERSION_MINOR_REDHTTPLogger 1
 #define COCOAPODS_VERSION_PATCH_REDHTTPLogger 0
 
+// RequestUtils
+#define COCOAPODS_POD_AVAILABLE_RequestUtils
+#define COCOAPODS_VERSION_MAJOR_RequestUtils 1
+#define COCOAPODS_VERSION_MINOR_RequestUtils 1
+#define COCOAPODS_VERSION_PATCH_RequestUtils 0
+

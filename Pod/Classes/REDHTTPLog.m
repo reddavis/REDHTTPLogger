@@ -8,13 +8,13 @@
 
 #import "REDHTTPLog.h"
 
-#import <AFNetworking/AFNetworking.h>
-
 
 @interface REDHTTPLog ()
 
 @property (assign, nonatomic) BOOL requestComplete;
-@property (strong, nonatomic) AFHTTPRequestOperation *requestOperation;
+@property (strong, nonatomic) NSURLRequest *request;
+@property (strong, nonatomic) NSHTTPURLResponse *response;
+@property (copy, nonatomic) NSString *responseBodyString;
 
 @property (copy, nonatomic) NSDate *startTime;
 @property (assign, nonatomic) NSTimeInterval responseTime;
@@ -26,12 +26,12 @@
 
 #pragma mark - Initialization
 
-- (instancetype)initWithRequestOperation:(AFHTTPRequestOperation *)requestOperation
+- (instancetype)initWithRequest:(NSURLRequest *)request
 {
     self = [self init];
     if (self)
     {
-        self.requestOperation = requestOperation;
+        self.request = request;
         self.startTime = [NSDate date];
     }
     
@@ -40,32 +40,34 @@
 
 #pragma mark -
 
-- (void)markAsComplete
+- (void)markAsCompleteWithResponse:(NSHTTPURLResponse *)response responseBodyString:(NSString *)bodyString
 {
+    self.response = response;
     self.responseTime = [[NSDate date] timeIntervalSinceDate:self.startTime];
     self.requestComplete = YES;
+    self.responseBodyString = bodyString;
 }
 
 #pragma mark - Request
 
 - (NSURL *)requestURL
 {
-    return self.requestOperation.request.URL;
+    return self.request.URL;
 }
 
 - (NSString *)HTTPMethod
 {
-    return [self.requestOperation.request.HTTPMethod copy];
+    return [self.request.HTTPMethod copy];
 }
 
 - (NSDictionary *)requestHTTPHeaderFields
 {
-    return [self.requestOperation.request.allHTTPHeaderFields copy];
+    return [self.request.allHTTPHeaderFields copy];
 }
 
 - (NSString *)requestBodyString
 {
-    NSData *bodyData = self.requestOperation.request.HTTPBody;
+    NSData *bodyData = self.request.HTTPBody;
     NSString *bodyString = [[NSString alloc] initWithData:bodyData encoding:NSUTF8StringEncoding];
     
     return bodyString;
@@ -75,12 +77,7 @@
 
 - (NSInteger)responseStatusCode
 {
-    return self.requestOperation.response.statusCode;
-}
-
-- (NSString *)responseBodyString
-{
-    return self.requestOperation.responseString;
+    return self.response.statusCode;
 }
 
 #pragma mark -

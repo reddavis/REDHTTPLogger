@@ -17,12 +17,43 @@
 @property (strong, nonatomic) NSMutableArray *mutableLogs;
 @property (strong, nonatomic) NSMutableSet *observers;
 
-- (REDHTTPLog *)findLogWithOperation:(AFHTTPRequestOperation *)operation;
+- (REDHTTPLog *)findLogWithRequest:(NSURLRequest *)request;
 
 - (void)networkingOperationDidStartNotification:(NSNotification *)notification;
 - (void)networkingOperationDidFinishNotification:(NSNotification *)notification;
 
 @end
+
+
+static NSURLRequest *requestFromNotificationObject(id object)
+{
+    NSURLRequest *request = nil;
+    if ([object respondsToSelector:@selector(originalRequest)])
+    {
+        request = [object originalRequest];
+    }
+    else if ([object respondsToSelector:@selector(request)])
+    {
+        request = [object request];
+    }
+    
+    return request;
+}
+
+
+static NSString *responseStringFromNotification(NSNotification *notification)
+{
+    NSString *responseString = nil;
+    if ([notification.object respondsToSelector:@selector(responseString)])
+    {
+        responseString = [notification.object responseString];
+    }
+    else if (notification.userInfo) {
+        responseString = notification.userInfo[AFNetworkingTaskDidCompleteSerializedResponseKey];
+    }
+    
+    return responseString;
+}
 
 
 @implementation REDHTTPLogger
@@ -73,6 +104,8 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkingOperationDidStartNotification:) name:AFNetworkingOperationDidStartNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkingOperationDidFinishNotification:) name:AFNetworkingOperationDidFinishNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkingOperationDidStartNotification:) name:AFNetworkingTaskDidResumeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkingOperationDidFinishNotification:) name:AFNetworkingTaskDidCompleteNotification object:nil];
 }
 
 - (void)stopLogging
@@ -94,14 +127,14 @@
 
 #pragma mark - Helpers
 
-- (REDHTTPLog *)findLogWithOperation:(AFHTTPRequestOperation *)operation
+- (REDHTTPLog *)findLogWithRequest:(NSURLRequest *)request
 {
     REDHTTPLog *log = nil;
     NSArray *recordedLogs = [NSArray arrayWithArray:self.logs];
     
     for (REDHTTPLog *recordedLog in recordedLogs)
     {
-        if (recordedLog.requestOperation == operation)
+        if (recordedLog.request == request)
         {
             log = recordedLog;
             break;
@@ -115,9 +148,13 @@
 
 - (void)networkingOperationDidStartNotification:(NSNotification *)notification
 {
-    AFHTTPRequestOperation *operation = (AFHTTPRequestOperation *)notification.object;
+    NSURLRequest *request = requestFromNotificationObject(notification.object);
+    if (!request)
+    {
+        return;
+    }
     
-    REDHTTPLog *log = [[REDHTTPLog alloc] initWithRequestOperation:operation];
+    REDHTTPLog *log = [[REDHTTPLog alloc] initWithRequest:request];
     [self.mutableLogs addObject:log];
     
     if (self.mutableLogs.count > self.maximumNumberOfLogs)
@@ -134,10 +171,22 @@
 
 - (void)networkingOperationDidFinishNotification:(NSNotification *)notification
 {
-    AFHTTPRequestOperation *operation = (AFHTTPRequestOperation *)notification.object;
+    NSURLResponse *response = nil;
+    id object = notification.object;
+    if ([object respondsToSelector:@selector(response)])
+    {
+        response = [object response];
+    }
+    else
+    {
+        return;
+    }
     
-    REDHTTPLog *log = [self findLogWithOperation:operation];
-    [log markAsComplete];
+    NSURLRequest *request = requestFromNotificationObject(notification.object);
+    REDHTTPLog *log = [self findLogWithRequest:request];
+    
+    NSString *responseString = responseStringFromNotification(notification);
+    [log markAsCompleteWithResponse:response responseBodyString:responseString];
     
     NSSet *observers = [NSSet setWithSet:self.observers];
     for (id<REDHTTPLoggerObserver> observer in observers)

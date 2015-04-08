@@ -7,12 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <AFNetworking/AFHTTPRequestOperation.h>
 
 
 @interface REDHTTPLog : NSObject
 
-@property (strong, nonatomic, readonly) AFHTTPRequestOperation *requestOperation;
+@property (strong, nonatomic, readonly) NSURLRequest *request;
 @property (assign, nonatomic, readonly) BOOL requestComplete;
 
 // Request
@@ -26,8 +25,8 @@
 @property (assign, nonatomic, readonly) NSTimeInterval responseTime;
 @property (copy, nonatomic, readonly) NSString *responseBodyString;
 
-- (instancetype)initWithRequestOperation:(AFHTTPRequestOperation *)requestOperation;
+- (instancetype)initWithRequest:(NSURLRequest *)request;
 
-- (void)markAsComplete;
+- (void)markAsCompleteWithResponse:(NSURLResponse *)response responseBodyString:(NSString *)bodyString;
 
 @end

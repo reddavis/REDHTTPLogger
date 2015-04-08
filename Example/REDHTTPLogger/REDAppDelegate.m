@@ -43,6 +43,8 @@
 - (void)dispatchHTTPRequest
 {
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    AFHTTPSessionManager *sessionManager = [AFHTTPSessionManager manager];
+    
     // GET JSON
     [manager GET:@"http://demo1289807.mockable.io/200JSON" parameters:@{@"param1":@"value1"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
@@ -57,9 +59,16 @@
     }];
     
     // POST JSON
-    [manager POST:@"http://demo1289807.mockable.io/200JSON" parameters:@{@"param1":@"value1"} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [sessionManager POST:@"http://demo1289807.mockable.io/200JSON" parameters:@{@"param1":@"value1"} success:^(NSURLSessionDataTask *task, id responseObject) {
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+        
+    }];
+    
+    // GET JSON
+    [sessionManager GET:@"http://demo1289807.mockable.io/200JSON" parameters:@{@"param1":@"value1", @"session-manager":@YES} success:^(NSURLSessionDataTask *task, id responseObject) {
+        
+    } failure:^(NSURLSessionDataTask *task, NSError *error) {
         
     }];
     

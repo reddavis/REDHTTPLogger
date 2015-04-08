@@ -23,6 +23,8 @@ PODS:
   - Kiwi (2.3.1)
   - REDHTTPLogger (0.1.0):
     - AFNetworking (~> 2.3)
+    - RequestUtils (~> 1.1)
+  - RequestUtils (1.1)
 
 DEPENDENCIES:
   - Kiwi
@@ -30,11 +32,12 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   REDHTTPLogger:
-    :path: ../
+    :path: "../"
 
 SPEC CHECKSUMS:
   AFNetworking: fefbce9660acb17f48ae0011292d4da0f457bf36
   Kiwi: f038a6c61f7a9e4d7766bff5717aa3b3fdb75f55
-  REDHTTPLogger: 31ef28f6c80f4fd012281e637207615d603db477
+  REDHTTPLogger: a1f7941fba501f08faf18b7b584cfa16a71b755a
+  RequestUtils: a33510359ff9c39945a981bb867ebba9e3881f14
 
-COCOAPODS: 0.36.0
+COCOAPODS: 0.36.3

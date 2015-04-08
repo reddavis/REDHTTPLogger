@@ -10,6 +10,8 @@
 #import "REDHTTPLog.h"
 #import "REDResponseViewController.h"
 
+#import <RequestUtils/RequestUtils.h>
+
 
 @interface REDHTTPLogRequestViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -155,9 +157,20 @@ typedef NS_ENUM(NSUInteger, REDTableDetailsRow)
                         cell.detailTextLabel.text = self.HTTPLog.requestURL.host;
                         break;
                     case REDTableDetailsRowPath:
+                    {
                         cell.textLabel.text = @"Path";
-                        cell.detailTextLabel.text = self.HTTPLog.requestURL.path;
+                        
+                        NSURL *URL = self.HTTPLog.requestURL;
+                        NSString *text = URL.path;
+                        if (URL.absoluteString.URLQuery)
+                        {
+                            text = [text stringByAppendingURLQuery:URL.absoluteString.URLQuery];
+                        }
+                        
+                        cell.detailTextLabel.text = text;
+                        
                         break;
+                    }
                     default:
                         break;
                 }

@@ -54,16 +54,14 @@ CGFloat const REDHTTPLogTableViewCellHeight = 50.0;
 
 - (void)reloadData
 {
-    NSURLRequest *request = self.log.requestOperation.request;
+    NSURLRequest *request = self.log.request;
     self.textLabel.text = request.URL.path;
     self.detailTextLabel.text = request.HTTPMethod;
     self.baseURLLabel.text = request.URL.host;
     
     if (self.log.requestComplete)
     {
-        NSHTTPURLResponse *response = self.log.requestOperation.response;
-        
-        UILabel *label = [self constructLabelWithStatusCode:response.statusCode];
+        UILabel *label = [self constructLabelWithStatusCode:self.log.responseStatusCode];
         [label sizeToFit];
         
         self.accessoryView = label;
