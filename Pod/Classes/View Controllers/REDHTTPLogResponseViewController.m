@@ -27,6 +27,7 @@ typedef NS_ENUM(NSUInteger, REDTableSection)
 {
     REDTableSectionStatusCode = 0,
     REDTableSectionResponseTime,
+    REDTableSectionContentSize,
     REDTableSectionBody
 };
 
@@ -85,7 +86,7 @@ typedef NS_ENUM(NSUInteger, REDTableSection)
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -97,6 +98,9 @@ typedef NS_ENUM(NSUInteger, REDTableSection)
             numberOfRows = 1;
             break;
         case REDTableSectionResponseTime:
+            numberOfRows = 1;
+            break;
+        case REDTableSectionContentSize:
             numberOfRows = 1;
             break;
         case REDTableSectionBody:
@@ -132,6 +136,12 @@ typedef NS_ENUM(NSUInteger, REDTableSection)
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             break;
         }
+        case REDTableSectionContentSize:
+        {
+            cell.textLabel.text = [NSString stringWithFormat:@"%f mb", ((self.HTTPLog.contentLength / 1024.0) / 1024.0)];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            break;
+        }
         case REDTableSectionBody:
         {
             cell.textLabel.text = @"Body";
@@ -156,6 +166,9 @@ typedef NS_ENUM(NSUInteger, REDTableSection)
             break;
         case REDTableSectionResponseTime:
             header = @"Response Time";
+            break;
+        case REDTableSectionContentSize:
+            header = @"Content Size";
             break;
         default:
             break;

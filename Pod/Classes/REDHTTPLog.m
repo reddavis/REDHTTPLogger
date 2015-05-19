@@ -15,6 +15,7 @@
 @property (strong, nonatomic) NSURLRequest *request;
 @property (strong, nonatomic) NSHTTPURLResponse *response;
 @property (copy, nonatomic) NSString *responseBodyString;
+@property (assign, nonatomic) NSInteger contentLength;
 
 @property (copy, nonatomic) NSDate *startTime;
 @property (assign, nonatomic) NSTimeInterval responseTime;
@@ -42,6 +43,7 @@
 
 - (void)markAsCompleteWithResponse:(NSHTTPURLResponse *)response responseBodyString:(NSString *)bodyString
 {
+    self.contentLength = response.expectedContentLength;
     self.response = response;
     self.responseTime = [[NSDate date] timeIntervalSinceDate:self.startTime];
     self.requestComplete = YES;

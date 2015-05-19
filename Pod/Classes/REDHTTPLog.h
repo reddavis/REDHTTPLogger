@@ -24,6 +24,7 @@
 @property (assign, nonatomic, readonly) NSInteger responseStatusCode;
 @property (assign, nonatomic, readonly) NSTimeInterval responseTime;
 @property (copy, nonatomic, readonly) NSString *responseBodyString;
+@property (assign, nonatomic, readonly) NSInteger contentLength;
 
 - (instancetype)initWithRequest:(NSURLRequest *)request;
 
