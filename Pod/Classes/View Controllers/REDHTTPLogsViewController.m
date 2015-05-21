@@ -58,7 +58,7 @@
 {
     [super viewWillAppear:animated];
     
-    self.logs = [REDHTTPLogger sharedLogger].logs;
+    self.logs = [REDHTTPLogger sharedLogger].logs.reverseObjectEnumerator.allObjects;
     [self.tableView reloadData];
     
     [[REDHTTPLogger sharedLogger] addObserver:self];
