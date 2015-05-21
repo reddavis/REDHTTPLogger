@@ -1163,14 +1163,14 @@
 		98F981ADC54DC53661D9C9D2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				9070AB1C49A625829FDEC4F1 /* REDHTTPLogsViewController.h */,
+				C9C97474701BC61EA283D326 /* REDHTTPLogsViewController.m */,
 				B707488F492C680AE67188D0 /* REDHTTPLogDetailsViewController.h */,
 				E55AC4F200A00386849EC8F6 /* REDHTTPLogDetailsViewController.m */,
 				653D11967574CC1FEDD63A08 /* REDHTTPLogRequestViewController.h */,
 				F3FFC64A248AC964B80D23C8 /* REDHTTPLogRequestViewController.m */,
 				F75D9645B1DE9C931F8955C8 /* REDHTTPLogResponseViewController.h */,
 				A15CE461A6861B704422179F /* REDHTTPLogResponseViewController.m */,
-				9070AB1C49A625829FDEC4F1 /* REDHTTPLogsViewController.h */,
-				C9C97474701BC61EA283D326 /* REDHTTPLogsViewController.m */,
 				E9DE13735B7A13806DE3A316 /* REDResponseViewController.h */,
 				15ED2A533C5896DD2DAE19A6 /* REDResponseViewController.m */,
 			);
