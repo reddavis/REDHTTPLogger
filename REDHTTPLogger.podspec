@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "REDHTTPLogger"
-  s.version          = "0.2.0"
+  s.version          = "0.2.1"
   s.summary          = "REDHTTPLogger makes it easy to inspect HTTP requests happening inside your iOS app without needed the debugger attached."
 #s.description      = <<-DESC
 #
@@ -32,4 +32,5 @@ Pod::Spec.new do |s|
     s.frameworks = 'UIKit'
     s.dependency 'AFNetworking', '~> 2.3'
     s.dependency 'RequestUtils', '~> 1.1'
+	s.dependency 'SBJson4'
 end
