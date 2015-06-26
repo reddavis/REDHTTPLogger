@@ -7,7 +7,7 @@
 //
 
 #import "REDResponseViewController.h"
-
+#import <SBJson4/SBJson4.h>
 
 @interface REDResponseViewController ()
 
@@ -26,7 +26,7 @@
     self = [self init];
     if (self)
     {
-        self.responseString = [NSString stringWithFormat:@"<xmp>%@</xmp>", responseString];
+        self.responseString = [NSString stringWithFormat:@"<xmp>%@</xmp>", [self humanReadableJSONFromString:responseString]];
     }
     
     return self;
@@ -54,5 +54,31 @@
 {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark - Private 
+
+- (NSString *)humanReadableJSONFromString:(NSString *)string
+{
+	SBJson4Writer *writer = [[SBJson4Writer alloc] init];
+	writer.humanReadable = YES;
+	writer.sortKeys = YES;
+	
+	__block NSString *output = nil;
+
+	SBJson4Parser *parser = [SBJson4Parser parserWithBlock:^(id item, BOOL *stop) {
+		id data = [writer dataWithObject:item];
+		output = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+	}
+											allowMultiRoot:YES
+										   unwrapRootArray:NO
+											  errorHandler:^(NSError *error) {
+		output = error.description;
+	}];
+
+	[parser parse:[string dataUsingEncoding:NSUTF8StringEncoding]];
+	return output;
+}
+
+
 
 @end
